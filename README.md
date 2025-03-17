@@ -30,6 +30,10 @@ Finishing off:
 - Configure your wifi and Mqtt settings
 - To check if everything is up and running you can listen to the MQTT topic `hass/status`, on startup a single message is sent.
 
+Reset the wifi and other parameters:
+- [DoubleResetDetector] (https://github.com/datacute/DoubleResetDetector) library is added.
+- when pushing the reset button twice within 10 seconds (or set in the `DRD_TIMEOUT`) the wifi settings will be cleared.
+
 ## Connecting to the P1 meter
 Connect the esp8266 to an RJ11 cable/connector following the diagram.
 
@@ -42,15 +46,18 @@ Connect the esp8266 to an RJ11 cable/connector following the diagram.
 | 4 -      |      |
 | 5 - RXD (data) | RX (gpio3) |
 
-On most Landys and Gyr models a 10K resistor should be used between the ESP's 3.3v and the p1's DATA (RXD) pin. Many howto's mention RTS requires 5V (VIN) to activate the P1 port, but for me 3V3 suffices.
+On most Landys and Gyr models a 10K resistor should be used between the ESP's 3.3v and the p1's DATA (RXD) pin.
+Many howto's mention RTS requires 5V (VIN) to activate the P1 port, but for me 3V3 suffices.
 
-![Wiring](https://raw.githubusercontent.com/daniel-jong/esp8266_p1meter/master/assets/esp8266_p1meter_bb.png)
-
-### Optional: Powering the esp8266 using your DSMR5+ meter 
-<details><summary>Expand to see wiring description</summary>
+<details><summary>Expand to see wiring schema</summary>
 <p>
-  
-When using a 6 pin cable you can use the power source provided by the meter.
+![Wiring](/assets/esp8266_p1meter_bb.png)
+</p>
+</details>
+### Optional: Powering the esp8266 using your DSMR5+ meter
+When using a 6 pin cable you can use the power source provided by the meter. 
+<details><summary>Expand to see wiring for 6 pins</summary>
+<p>
   
 | P1 pin   | ESP8266 Pin |
 | ----     | ---- |
@@ -61,7 +68,7 @@ When using a 6 pin cable you can use the power source provided by the meter.
 | 5 - RXD (data) | RX (gpio3) |
 | 6 - GND  | GND  |
 
-![Wiring powered by meter](https://raw.githubusercontent.com/daniel-jong/esp8266_p1meter/master/assets/esp8266_p1meter_bb_PoweredByMeter.png)
+![Wiring powered by meter](/assets/esp8266_p1meter_bb_PoweredByMeter.png)
 
 </p>
 </details>
@@ -72,45 +79,57 @@ All metrics are send to their own MQTT topic.
 The software sends out to the following MQTT topics:
 
 ```
-sensors/power/p1meter/consumption_low_tarif 2209397
-sensors/power/p1meter/consumption_high_tarif 1964962
-sensors/power/p1meter/returndelivery_low_tarif 2209397
-sensors/power/p1meter/returndelivery_high_tarif 1964962
-sensors/power/p1meter/actual_consumption 313
-sensors/power/p1meter/actual_returndelivery 0
-sensors/power/p1meter/l1_instant_power_usage 313
-sensors/power/p1meter/l2_instant_power_usage 0
-sensors/power/p1meter/l3_instant_power_usage 0
-sensors/power/p1meter/l1_instant_power_current 1000
-sensors/power/p1meter/l2_instant_power_current 0
-sensors/power/p1meter/l3_instant_power_current 0
+sensors/power/p1meter/consumption_active_tariff_in 2209397
+sensors/power/p1meter/consumption_active_tariff_out 1964962
+sensors/power/p1meter/returndelivery_reactive_tariff_out 2209397
+sensors/power/p1meter/returndelivery_reactive_tariff_in 1964962
+sensors/power/p1meter/active_consumption 0
+sensors/power/p1meter/active_returndelivery 0
+sensors/power/p1meter/reactive_consumption 0
+sensors/power/p1meter/reactive_returndelivery 0
+sensors/power/p1meter/l1_active_power_usage 0
+sensors/power/p1meter/l1_active_power_return 0
+sensors/power/p1meter/l2_active_power_usage 0
+sensors/power/p1meter/l2_active_power_return 0
+sensors/power/p1meter/l3_active_power_usage 0
+sensors/power/p1meter/l3_active_power_return 0
+sensors/power/p1meter/l1_active_power_current 1000
+sensors/power/p1meter/l2_active_power_current 0
+sensors/power/p1meter/l3_active_power_current 0
+sensors/power/p1meter/l1_reactive_power_usage 0
+sensors/power/p1meter/l1_reactive_power_return 0
+sensors/power/p1meter/l2_reactive_power_usage 0
+sensors/power/p1meter/l2_reactive_power_return 0
+sensors/power/p1meter/l3_reactive_power_usage 0
+sensors/power/p1meter/l3_reactive_power_return 0
 sensors/power/p1meter/l1_voltage 233
 sensors/power/p1meter/l2_voltage 0
 sensors/power/p1meter/l3_voltage 0
-sensors/power/p1meter/gas_meter_m3 968922
-sensors/power/p1meter/actual_tarif_group 2
-sensors/power/p1meter/short_power_outages 3
-sensors/power/p1meter/long_power_outages 1
-sensors/power/p1meter/short_power_drops 0
-sensors/power/p1meter/short_power_peaks 0
 ```
 
 ## Home Assistant Configuration
 
-Use this [example](https://raw.githubusercontent.com/daniel-jong/esp8266_p1meter/master/assets/p1_sensors.yaml) for home assistant's `sensor.yaml`
+Use this [example](/assets/p1_sensors.yaml) for home assistant's `sensor.yaml`
 
 The automatons are yours to create.
 And always remember that sending alerts in case of a power outtage only make sense when you own a UPS battery :)
 
-## Thanks to
+Although I've never had issues as a result of using this sketch reading my p1 meter, software can change, bugs can be introduced and incidents happen.
+Using this sketch is at your own risk...
 
-This sketch is mostly copied and pasted from several other projects.
+Powering your meter from your p1 port should be safe as the power outlet is fully isolated from the meter but still: Don't look at me if you blowup your meter ;)
+
+## Contributors
+
+A special mention for the contributions made by other developers that make working on this sketch more fun and helped this project forward by fixing bugs and adding functionalityand to those that took the time to write down the information that helped understanding what the p1 meter was about. If you are one of them and not yet on the list, I'd love to add your name as I think it's important to mention those that enable us to have nice toys.
+
 Standing on the heads of giants, big thanks and great respect to the writers and/or creators of:
 
-- https://github.com/jantenhove/P1-Meter-ESP8266
-- https://github.com/neographikal/P1-Meter-ESP8266-MQTT
-- http://gejanssen.com/howto/Slimme-meter-uitlezen/
-- https://github.com/rroethof/p1reader/
-- http://romix.macuser.nl/software.html
-- http://blog.regout.info/category/slimmeter/
-- http://domoticx.com/p1-poort-slimme-meter-hardware/
+- [Daniel de Jong](https://github.com/daniel-jong)
+- [Flip Hess](https://github.com/fliphess)
+- [Thomas Roos](https://github.com/Roosted7)
+- [Gé Janssen](http://gejanssen.com/howto/Slimme-meter-uitlezen)
+- [Jan ten Hove](https://github.com/jantenhove/P1-Meter-ESP8266)
+- [Ronny Roethof](https://github.com/rroethof/p1reader)
+- [Ronald Leenes](http://romix.macuser.nl/software.html)
+- [Robert-Jan Regout](http://blog.regout.info/category/slimmeter)
