@@ -51,6 +51,7 @@ Many howto's mention RTS requires 5V (VIN) to activate the P1 port, but for me 3
 
 <details><summary>Expand to see wiring schema</summary>
 <p>
+
 ![Wiring](/assets/esp8266_p1meter_bb.png)
 </p>
 </details>
