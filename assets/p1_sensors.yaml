@@ -1,109 +1,190 @@
-# Sensors for esp8266_p1meter to be used in Home Assistant
 mqtt:
+# Sensors for esp8266_p1meter to be used in Home Assistant
   sensor:
-    - name: P1 Consumption Low Tariff
-      unique_id: 'sensor.p1_consumption_low_tariff'
+    - name: P1 Consumption Active Tariff in
+      unique_id: 'sensor.p1_consumption_active_tariff_in'
       device_class: energy
       state_class: total_increasing
       unit_of_measurement: kWh
-      state_topic: "sensors/power/p1meter/consumption_low_tarif"
+      state_topic: "sensors/power/p1meter/consumption_active_tariff_in"
       value_template: "{{ value|float / 1000 }}"
-
-
-    - name: P1 Consumption High Tariff
-      unique_id: 'sensor.p1_consumption_high_tariff'
+      
+    - name: P1 Consumption Active Tariff out
+      unique_id: 'sensor.p1_consumption_active_tariff_out'
       device_class: energy
       state_class: total_increasing
       unit_of_measurement: kWh
-      state_topic: "sensors/power/p1meter/consumption_high_tarif"
+      state_topic: "sensors/power/p1meter/consumption_active_tariff_out"
       value_template: "{{ value|float / 1000 }}"
-
-
-    - name: P1 Return Delivery High Tariff
-      unique_id: 'sensor.p1_delivery_high_tariff'
+      
+    - name: P1 Returndelivery Rective Tariff in
+      unique_id: 'sensor.p1_returndelivery_reactive_tariff_out'
       device_class: energy
       state_class: total_increasing
-      unit_of_measurement: kWh
-      state_topic: "sensors/power/p1meter/returndelivery_high_tarif"
+      unit_of_measurement: kVArh
+      state_topic: "sensors/power/p1meter/returndelivery_reactive_tariff_out"
       value_template: "{{ value|float / 1000 }}"
-
-
-    - name: P1 Return Delivery Low Tariff
-      unique_id: 'sensor.p1_delivery_low_tariff'
+      
+    - name: P1 Returndelivery Rective Tariff out
+      unique_id: 'sensor.p1_returndelivery_reactive_tariff_in'
       device_class: energy
       state_class: total_increasing
-      unit_of_measurement: kWh
-      state_topic: "sensors/power/p1meter/returndelivery_low_tarif"
+      unit_of_measurement: kVArh
+      state_topic: "sensors/power/p1meter/returndelivery_reactive_tariff_in"
       value_template: "{{ value|float / 1000 }}"
-
-    - name: P1 Actual Power Consumption
-      unique_id: 'sensor.p1_actual_power_consumption'
+      
+    - name: P1 Active Power Consumption
+      unique_id: 'sensor.p1_active_power_consumption'
       device_class: power
       state_class: measurement
       unit_of_measurement: 'kW'
-      state_topic: "sensors/power/p1meter/actual_consumption"
+      state_topic: "sensors/power/p1meter/active_consumption"
       value_template: "{{ value|float / 1000 }}"
-
-
-    - name: P1 Actual Return Delivery
-      unique_id: 'sensor.p1_actual_return_delivery'
+      
+    - name: P1 Active Return Delivery
+      unique_id: 'sensor.p1_active_return_delivery'
       device_class: power
       state_class: measurement
       unit_of_measurement: 'kW'
-      state_topic: "sensors/power/p1meter/actual_returndelivery"
+      state_topic: "sensors/power/p1meter/active_returndelivery"
       value_template: "{{ value|float / 1000 }}"
-
-
-    - name: P1 L1 Instant Power Usage
-      unique_id: 'sensor.p1_l1_instant_power_usage'
+      
+    - name: P1 Rective Power Consumption
+      unique_id: 'sensor.p1_reactive_power_consumption'
+      device_class: power
+      state_class: measurement
+      unit_of_measurement: 'kVArh'
+      state_topic: "sensors/power/p1meter/reactive_consumption"
+      value_template: "{{ value|float / 1000 }}"
+      
+    - name: P1 Rective Power Delivery
+      unique_id: 'sensor.p1_reactive_returndelivery'
+      device_class: power
+      state_class: measurement
+      unit_of_measurement: 'kVArh'
+      state_topic: "sensors/power/p1meter/reactive_returndelivery"
+      value_template: "{{ value|float / 1000 }}"
+      
+    - name: P1 L1 Active Power Usage
+      unique_id: 'sensor.p1_l1_active_power_usage'
       device_class: power
       state_class: measurement
       unit_of_measurement: 'kW'
-      state_topic: "sensors/power/p1meter/l1_instant_power_usage"
+      state_topic: "sensors/power/p1meter/l1_active_power_usage"
       value_template: "{{ value|float / 1000 }}"
 
-
-    - name: P1 L2 Instant Power Usage
-      unique_id: 'sensor.p1_l2_instant_power_usage'
+    - name: P1 L1 Active Power Return
+      unique_id: 'sensor.p1_l1_active_power_return'
       device_class: power
       state_class: measurement
       unit_of_measurement: 'kW'
-      state_topic: "sensors/power/p1meter/l2_instant_power_usage"
+      state_topic: "sensors/power/p1meter/l1_active_power_return"
       value_template: "{{ value|float / 1000 }}"
 
-
-    - name: P1 L3 Instant Power Usage
-      unique_id: 'sensor.p1_l3_instant_power_usage'
+    - name: P1 L2 Active Power Usage
+      unique_id: 'sensor.p1_l2_active_power_usage'
       device_class: power
       state_class: measurement
       unit_of_measurement: 'kW'
-      state_topic: "sensors/power/p1meter/l3_instant_power_usage"
+      state_topic: "sensors/power/p1meter/l2_active_power_usage"
       value_template: "{{ value|float / 1000 }}"
-
-    - name: P1 L1 Instant Power Current
-      unique_id: 'sensor.p1_l1_instant_power_current'
+      
+    - name: P1 L2 Active Power Return
+      unique_id: 'sensor.p1_l2_active_power_return'
+      device_class: power
+      state_class: measurement
+      unit_of_measurement: 'kW'
+      state_topic: "sensors/power/p1meter/l2_active_power_return"
+      value_template: "{{ value|float / 1000 }}"
+      
+    - name: P1 L3 Active Power Usage
+      unique_id: 'sensor.p1_l3_active_power_usage'
+      device_class: power
+      state_class: measurement
+      unit_of_measurement: 'kW'
+      state_topic: "sensors/power/p1meter/l3_active_power_usage"
+      value_template: "{{ value|float / 1000 }}"
+      
+    - name: P1 L3 Active Power Return
+      unique_id: 'sensor.p1_l3_active_power_return'
+      device_class: power
+      state_class: measurement
+      unit_of_measurement: 'kW'
+      state_topic: "sensors/power/p1meter/l3_active_power_return"
+      value_template: "{{ value|float / 1000 }}"
+      
+    - name: P1 L1 Active Power Current
+      unique_id: 'sensor.p1_l1_active_power_current'
       device_class: current
       state_class: measurement
       unit_of_measurement: 'A'
-      state_topic: "sensors/power/p1meter/l1_instant_power_current"
+      state_topic: "sensors/power/p1meter/l1_active_power_current"
       value_template: "{{ value|float / 1000 }}"
-
-    - name: P1 L2 Instant Power Current
-      unique_id: 'sensor.p1_l2_instant_power_current'
+      
+    - name: P1 L2 Active Power Current
+      unique_id: 'sensor.p1_l2_active_power_current'
       device_class: current
       state_class: measurement
       unit_of_measurement: 'A'
-      state_topic: "sensors/power/p1meter/l2_instant_power_current"
+      state_topic: "sensors/power/p1meter/l2_active_power_current"
       value_template: "{{ value|float / 1000 }}"
-
-    - name: P1 L3 Instant Power Current
-      unique_id: 'sensor.p1_l3_instant_power_current'
+      
+    - name: P1 L3 Active Power Current
+      unique_id: 'sensor.p1_l3_active_power_current'
       device_class: current
       state_class: measurement
       unit_of_measurement: 'A'
-      state_topic: "sensors/power/p1meter/l3_instant_power_current"
+      state_topic: "sensors/power/p1meter/l3_active_power_current"
+      value_template: "{{ value|float / 1000 }}"
+      
+    - name: P1 L1 Rective Power Usage
+      unique_id: 'sensor.p1_l1_reactive_power_usage'
+      device_class: power
+      state_class: measurement
+      unit_of_measurement: 'kVArh'
+      state_topic: "sensors/power/p1meter/l1_reactive_power_usage"
       value_template: "{{ value|float / 1000 }}"
 
+    - name: P1 L1 Rective Power Return
+      unique_id: 'sensor.p1_l1_reactive_power_return'
+      device_class: power
+      state_class: measurement
+      unit_of_measurement: 'kVArh'
+      state_topic: "sensors/power/p1meter/l1_reactive_power_return"
+      value_template: "{{ value|float / 1000 }}"
+
+    - name: P1 L2 Rective Power Usage
+      unique_id: 'sensor.p1_l2_reactive_power_usage'
+      device_class: power
+      state_class: measurement
+      unit_of_measurement: 'kVArh'
+      state_topic: "sensors/power/p1meter/l2_reactive_power_usage"
+      value_template: "{{ value|float / 1000 }}"
+      
+    - name: P1 L2 Rective Power Return
+      unique_id: 'sensor.p1_l2_reactive_power_return'
+      device_class: power
+      state_class: measurement
+      unit_of_measurement: 'kVArh'
+      state_topic: "sensors/power/p1meter/l2_reactive_power_return"
+      value_template: "{{ value|float / 1000 }}"
+      
+    - name: P1 L3 Rective Power Usage
+      unique_id: 'sensor.p1_l3_reactive_power_usage'
+      device_class: power
+      state_class: measurement
+      unit_of_measurement: 'kVArh'
+      state_topic: "sensors/power/p1meter/l3_reactive_power_usage"
+      value_template: "{{ value|float / 1000 }}"
+      
+    - name: P1 L3 Rective Power Return
+      unique_id: 'sensor.p1_l3_reactive_power_return'
+      device_class: power
+      state_class: measurement
+      unit_of_measurement: 'kVArh'
+      state_topic: "sensors/power/p1meter/l3_reactive_power_return"
+      value_template: "{{ value|float / 1000 }}"
+      
     - name: P1 L1 Voltage
       unique_id: 'sensor.p1_l1_voltage'
       device_class: voltage
@@ -111,7 +192,7 @@ mqtt:
       unit_of_measurement: 'V'   
       state_topic: "sensors/power/p1meter/l1_voltage"
       value_template: "{{ value|float / 1000 }}"
-
+      
     - name: P1 L2 Voltage
       unique_id: 'sensor.p1_l2_voltage'
       device_class: voltage
@@ -119,7 +200,7 @@ mqtt:
       unit_of_measurement: 'V'   
       state_topic: "sensors/power/p1meter/l2_voltage"
       value_template: "{{ value|float / 1000 }}"
-
+      
     - name: P1 L3 Voltage
       unique_id: 'sensor.p1_l3_voltage'
       device_class: voltage
@@ -127,31 +208,3 @@ mqtt:
       unit_of_measurement: 'V'   
       state_topic: "sensors/power/p1meter/l3_voltage"
       value_template: "{{ value|float / 1000 }}"
-
-    - name: P1 Gas Usage
-      unique_id: 'sensor.p1_gas_usage'
-      device_class: gas
-      state_class: total_increasing
-      unit_of_measurement: 'm³'
-      state_topic: "sensors/power/p1meter/gas_meter_m3"
-      value_template: "{{ value|float / 1000 }}"
-
-    - name: P1 Actual Tariff Group
-      unique_id: 'sensor.p1_actual_tariff_group'
-      state_topic: "sensors/power/p1meter/actual_tarif_group"
-
-    - name: P1 Short Power Outages
-      unique_id: 'sensor.p1_short_power_outages'
-      state_topic: "sensors/power/p1meter/short_power_outages"
-
-    - name: P1 Long Power Outages
-      unique_id: 'sensor.p1_long_power_outages'
-      state_topic: "sensors/power/p1meter/long_power_outages"
-
-    - name: P1 Short Power Drops
-      unique_id: 'sensor.p1_short_power_drops'
-      state_topic: "sensors/power/p1meter/short_power_drops"
-
-    - name: P1 Short Power Peaks
-      unique_id: 'sensor.p1_short_power_peaks'
-      state_topic: "sensors/power/p1meter/short_power_peaks"
