@@ -1,36 +1,36 @@
 mqtt:
 # Sensors for esp8266_p1meter to be used in Home Assistant
   sensor:
-    - name: P1 Consumption Active Tariff in
-      unique_id: 'sensor.p1_consumption_active_tariff_in'
+    - name: P1 Consumption Active Tarif in
+      unique_id: 'sensor.p1_consumption_active_tarif_in'
       device_class: energy
       state_class: total_increasing
       unit_of_measurement: kWh
-      state_topic: "sensors/power/p1meter/consumption_active_tariff_in"
+      state_topic: "sensors/power/p1meter/consumption_active_tarif_in"
       value_template: "{{ value|float / 1000 }}"
       
-    - name: P1 Consumption Active Tariff out
-      unique_id: 'sensor.p1_consumption_active_tariff_out'
+    - name: P1 Consumption Active Tarif out
+      unique_id: 'sensor.p1_consumption_active_tarif_out'
       device_class: energy
       state_class: total_increasing
       unit_of_measurement: kWh
-      state_topic: "sensors/power/p1meter/consumption_active_tariff_out"
+      state_topic: "sensors/power/p1meter/consumption_active_tarif_out"
       value_template: "{{ value|float / 1000 }}"
       
-    - name: P1 Returndelivery Rective Tariff in
-      unique_id: 'sensor.p1_returndelivery_reactive_tariff_out'
+    - name: P1 Returndelivery Rective Tarif in
+      unique_id: 'sensor.p1_returndelivery_reactive_tarif_out'
       device_class: energy
       state_class: total_increasing
       unit_of_measurement: kVArh
-      state_topic: "sensors/power/p1meter/returndelivery_reactive_tariff_out"
+      state_topic: "sensors/power/p1meter/returndelivery_reactive_tarif_out"
       value_template: "{{ value|float / 1000 }}"
       
-    - name: P1 Returndelivery Rective Tariff out
-      unique_id: 'sensor.p1_returndelivery_reactive_tariff_in'
+    - name: P1 Returndelivery Rective Tarif out
+      unique_id: 'sensor.p1_returndelivery_reactive_tarif_in'
       device_class: energy
       state_class: total_increasing
       unit_of_measurement: kVArh
-      state_topic: "sensors/power/p1meter/returndelivery_reactive_tariff_in"
+      state_topic: "sensors/power/p1meter/returndelivery_reactive_tarif_in"
       value_template: "{{ value|float / 1000 }}"
       
     - name: P1 Active Power Consumption
@@ -208,3 +208,4 @@ mqtt:
       unit_of_measurement: 'V'   
       state_topic: "sensors/power/p1meter/l3_voltage"
       value_template: "{{ value|float / 1000 }}"
+      
